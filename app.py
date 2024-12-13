@@ -1,5 +1,5 @@
-from fastapi import FastAPI, UploadFile, File
-from fastapi.responses import FileResponse, HTMLResponse
+from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi.responses import FileResponse, HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from PIL import Image
@@ -38,14 +38,15 @@ async def upload_images(files: list[UploadFile] = File(...)):
     if image_list:
         image_list[0].save(output_path, save_all=True, append_images=image_list[1:])
 
-    return {"download_url": f"/download?file=combined.pdf"}
+    # Return a redirect to the download route
+    return RedirectResponse(url=f"/download?file=combined.pdf", status_code=303)
 
 @app.get("/download")
 async def download_file(file: str):
     """Download the generated PDF file."""
     file_path = os.path.join(temp_dir, file)
     if os.path.exists(file_path):
-        return FileResponse(file_path, media_type="application/pdf", filename=file)
-    return {"error": "File not found"}
+        return FileResponse(file_path, media_type="application/pdf", filename=file, headers={"Content-Disposition": f"attachment; filename={file}"})
+    raise HTTPException(status_code=404, detail="File not found")
 
 # Cleanup is handled automatically in serverless environments
