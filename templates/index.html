@@ -4,24 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image to PDF Converter</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     <h1>Upload Images to Create a PDF</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data" id="upload-form">
-        <div id="drop-area" class="drop-area">
-            <p>Drag & Drop images here or click to select</p>
-            <input type="file" name="files" id="file-input" multiple required>
-        </div>
-        <div id="image-preview-container" class="image-preview-container"></div>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="files" multiple required>
         <button type="submit">Generate PDF</button>
     </form>
-
-    <!-- Loading Indicator -->
-    <div id="loading" style="display:none;">
-        <p>Generating PDF...</p>
-    </div>
-
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
