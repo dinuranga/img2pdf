@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to PDF Converter</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Upload Images to Create a PDF</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="files" multiple required>
+        <button type="submit">Generate PDF</button>
+    </form>
+</body>
+</html>
