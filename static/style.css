@@ -41,16 +41,3 @@ button {
 button:hover {
     background: #0056b3;
 }
-
-#drop-area {
-    width: 100%;
-    padding: 20px;
-    border: 2px dashed #007bff;
-    text-align: center;
-    border-radius: 4px;
-}
-
-#loading {
-    text-align: center;
-    margin-top: 20px;
-}
